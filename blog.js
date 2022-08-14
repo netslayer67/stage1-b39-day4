@@ -1,0 +1,144 @@
+let dataBlog = []
+function addBlog(event){
+    event.preventDefault()
+
+    let title = document.getElementById("input-blog-title").value
+    let content = document.getElementById("input-blog-content").value
+    let image = document.getElementById("input-blog-image").files
+    let react = document.getElementById("inputReact").checked
+    let nodeJs = document.getElementById("inputNode").checked
+    let java = document.getElementById("inputNext").checked
+    let python = document.getElementById("inputTs").checked
+
+    if(react){
+        react = document.getElementById("inputReact").value
+    } else {
+        react = ''
+    }
+    if(nodeJs){
+        nodeJs = document.getElementById("inputNode").value
+    } else {
+        nodeJs = ''
+    }
+    if(java){
+        java = document.getElementById("inputNext").value
+    } else {
+        java = ''
+    }
+    if(python){
+        python = document.getElementById("inputTs").value
+    } else {
+        python = ''
+    }
+
+    console.log(react);
+    console.log(nodeJs);
+    console.log(java);
+    console.log(python);
+
+
+
+    // untuk membuat url gambar, agar tampil
+    image = URL.createObjectURL(image[0])
+
+    let blog = {
+        title,
+        content,
+        image,
+        author: "Sayed Jilliyan",
+        postAt: "11 Agustus 2022",
+        react,
+        nodeJs,
+        java,
+        python
+    }
+
+    dataBlog.push(blog)
+    // console.log(dataBlog);
+
+    renderBlog()
+}
+
+function renderBlog(){
+    
+    document.getElementById("contents").innerHTML = ''
+
+    console.log(dataBlog);
+    
+    for (let index = 0; index < dataBlog.length; index++) {
+        
+        // console.log(dataBlog[index]);
+        document.getElementById("contents").innerHTML += 
+        `
+        <div class="blog-list-item">
+                <div class="blog-image">
+                    <img src="${dataBlog[index].image}" alt="" />
+                </div>
+                <div class="blog-content">
+                    
+                    <h1>
+                        <a class="judul-content" href="blog-detail.html" target="_blank">${dataBlog[index].title}</a>
+                    </h1>
+                    <div class="detail-blog-content">
+                        Durasi: 3 bulan
+                    </div>
+                    <div class="kalimat">
+                    <p>
+                        ${dataBlog[index].content}
+                    </p>
+                    </div>
+
+                    <div>
+                        <i class="fa-brands fa-${dataBlog[index].react}"></i>
+                        <i class="fa-brands fa-${dataBlog[index].nodeJs}"></i>
+                        <i class="fa-brands fa-${dataBlog[index].java}"></i>
+                        <i class="fa-brands fa-${dataBlog[index].python}"></i>
+                    </div>
+
+                    <div class="btn-group">
+                        <div class="btn-edit">
+                            <button>Edit Post</button>
+                        </div>
+                        
+                        <div  class="btn-delete">
+                            <button>Delete Blog</button>
+                        </div>
+                        
+                    </div>
+
+
+                </div>
+            </div>
+
+        `
+
+
+        // `
+        // <div class="blog-list-item">
+        //     <div class="blog-image">
+        //         <img src="${dataBlog[index].image}" alt="" />
+        //     </div>
+        //     <div class="blog-content">
+        //         <div class="btn-group">
+        //             <button class="btn-edit">Edit Post</button>
+        //             <button class="btn-post">Post Blog</button>
+        //         </div>
+        //         <h1>
+        //             <a href="blog-detail.html" target="_blank"
+        //             >${dataBlog[index].title}</a
+        //             >
+        //         </h1>
+        //         <div class="detail-blog-content">
+        //             ${dataBlog[index].postAt} | ${dataBlog[index].author}
+        //         </div>
+        //         <p>
+        //             ${dataBlog[index].content}
+        //         </p>
+        //     </div>
+        // </div>
+        // `
+    }
+
+}
+
+let data
